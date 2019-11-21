@@ -10,6 +10,15 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
+      security: []
+      requestBody: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: ''
+      description: ''
       responses:
         '200':
           description: OK
@@ -18,20 +27,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  dueInvoices:
-                    type: array
-                    items: {}
-                  estimates:
-                    type: array
-                    items: {}
-                  estimatesCount:
-                    type: integer
-                  totalDueAmount:
-                    type: integer
-                  invoicesCount:
-                    type: integer
-                  customersCount:
-                    type: integer
                   chartData:
                     type: object
                     properties:
@@ -47,6 +42,36 @@ paths:
                         type: array
                         items:
                           type: number
+                      netProfits:
+                        type: array
+                        items:
+                          type: string
+                      receiptTotals:
+                        type: array
+                        items:
+                          type: string
+                  customersCount:
+                    type: integer
+                  invoicesCount:
+                    type: integer
+                  totalDueAmount:
+                    type: integer
+                  estimatesCount:
+                    type: integer
+                  estimates:
+                    type: array
+                    items: {}
+                  dueInvoices:
+                    type: array
+                    items: {}
+                  salesTotal:
+                    type: integer
+                  totalReceipts:
+                    type: integer
+                  totalExpenses:
+                    type: integer
+                  netProfit:
+                    type: integer
               examples:
                 dashboard-data:
                   value:
@@ -126,15 +151,6 @@ paths:
                     totalReceipts: 0
                     totalExpenses: 0
                     netProfit: 0
-      security: []
-      requestBody: {}
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: ''
-      description: ''
 components:
   schemas:
     Tax:
