@@ -1,0 +1,459 @@
+openapi: 3.0.0
+info:
+  title: crater
+  version: '1.0'
+servers:
+  - url: 'https://craterapp.com/api'
+    description: ''
+paths:
+  /dashboard:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dueInvoices:
+                    type: array
+                    items: {}
+                  estimates:
+                    type: array
+                    items: {}
+                  estimatesCount:
+                    type: integer
+                  totalDueAmount:
+                    type: integer
+                  invoicesCount:
+                    type: integer
+                  customersCount:
+                    type: integer
+                  chartData:
+                    type: object
+                    properties:
+                      months:
+                        type: array
+                        items:
+                          type: string
+                      invoiceTotals:
+                        type: array
+                        items:
+                          type: number
+                      expenseTotals:
+                        type: array
+                        items:
+                          type: number
+              examples:
+                dashboard-data:
+                  value:
+                    dueInvoices: []
+                    estimates: []
+                    estimatesCount: 0
+                    totalDueAmount: 0
+                    invoicesCount: 0
+                    customersCount: 0
+                    chartData:
+                      months:
+                        - Dec
+                        - Jan
+                        - Feb
+                        - Mar
+                        - Apr
+                        - May
+                        - Jun
+                        - Jul
+                        - Aug
+                        - Sep
+                        - Oct
+                        - Nov
+                      invoiceTotals:
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                      expenseTotals:
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                      receiptTotals:
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                      netProfits:
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                        - 0
+                    salesTotal: 0
+                    totalReceipts: 0
+                    totalExpenses: 0
+                    netProfit: 0
+      security: []
+      requestBody: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: ''
+      description: ''
+components:
+  schemas:
+    Tax:
+      title: Tax
+      type: object
+      properties:
+        id:
+          type: integer
+        tax_type_id:
+          type: integer
+        invoice_id:
+          type: integer
+        estimate_id:
+          type: integer
+        invoice_item_id:
+          type: integer
+        estimate_item_id:
+          type: integer
+        item_id:
+          type: integer
+        company_id:
+          type: integer
+        name:
+          type: string
+        amount:
+          type: integer
+        percent:
+          type: number
+        compund_tax:
+          type: boolean
+      x-examples:
+        Tax:
+          id: 1
+          tax_type_id: 1
+          invoice_id: 1
+          estimate_id: null
+          invoice_item_id: null
+          estimate_item_id: null
+          item_id: null
+          company_id: 1
+          name: GST
+          amount: 2160
+          percent: 18
+          compound_tax: 0
+          created_at: '2019-11-20 13:49:16'
+          updated_at: '2019-11-20 13:49:16'
+          tax_type:
+            id: 1
+            name: GST
+            percent: 18
+            compound_tax: 0
+            collective_tax: 0
+            description: null
+            company_id: 1
+            created_at: '2019-11-20 13:36:42'
+            updated_at: '2019-11-20 13:36:42'
+      description: ''
+    TaxType:
+      title: TaxType
+      type: object
+      x-examples:
+        TaxType:
+          id: 1
+          name: GST
+          percent: 18
+          compound_tax: 0
+          collective_tax: 0
+          description: null
+          company_id: 1
+          created_at: '2019-11-20 13:36:42'
+          updated_at: '2019-11-20 13:36:42'
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        percent:
+          type: number
+        compound_tax:
+          type: boolean
+        collective_tax:
+          type: boolean
+        description:
+          type: string
+        company_id:
+          type: integer
+    Company:
+      title: Company
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        logo:
+          type: string
+        unique_hash:
+          type: string
+      x-examples:
+        company:
+          id: 1
+          name: BYTEFURY
+          logo: null
+          unique_hash: XMnNbJeproW6eCBHQEGDPzdLXku1HmxIgMTVxHuC9SQ9Pn0EiAsdROMuC5ZQ
+          created_at: '2019-11-20 12:40:38'
+          updated_at: '2019-11-20 12:40:38'
+          media: []
+    Country:
+      title: Country
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        phonecode:
+          type: integer
+      x-examples:
+        country:
+          id: 101
+          code: IN
+          name: India
+          phonecode: 91
+    State:
+      title: State
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        country_id:
+          type: integer
+      x-examples:
+        State:
+          id: 12
+          name: Gujarat
+          country_id: 101
+    City:
+      title: City
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        state_id:
+          type: integer
+      x-examples:
+        city:
+          id: 783
+          name: Ahmedabad
+          state_id: 12
+    Currency:
+      title: Currency
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+        symbol:
+          type: string
+        precision:
+          type: integer
+        thousand_separator:
+          type: string
+        decimal_separator:
+          type: string
+        swap_currency_symbol:
+          type: boolean
+      x-examples:
+        currency:
+          id: 1
+          name: US Dollar
+          code: USD
+          symbol: $
+          precision: 2
+          thousand_separator: ','
+          decimal_separator: .
+          swap_currency_symbol: 0
+          created_at: '2019-11-20 12:39:24'
+          updated_at: '2019-11-20 12:39:24'
+    Address:
+      title: Address
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address_street_1:
+          type: string
+        address_steet_2:
+          type: string
+        city_id:
+          type: integer
+        state_id:
+          type: integer
+        country_id:
+          type: integer
+        zip:
+          type: string
+        phone:
+          type: string
+        fax:
+          type: string
+        type:
+          type: string
+        user_id:
+          type: integer
+      x-examples:
+        customer-address:
+          id: 2
+          name: john doe
+          address_street_1: street 1
+          address_street_2: street2
+          city_id: 783
+          state_id: 12
+          country_id: 101
+          zip: '123456'
+          phone: '1234567890'
+          fax: null
+          type: billing
+          user_id: 2
+          created_at: '2019-11-20 12:56:56'
+          updated_at: '2019-11-20 12:56:56'
+    User:
+      title: User
+      type: object
+      x-examples:
+        customer:
+          id: 2
+          name: john doe
+          email: johndoe@example.com
+          phone: '1234567890'
+          role: customer
+          facebook_id: null
+          google_id: null
+          github_id: null
+          contact_name: john
+          company_name: null
+          website: 'http://example.com'
+          enable_portal: null
+          currency_id: 11
+          company_id: 1
+          created_at: '2019-11-20 12:56:56'
+          updated_at: '2019-11-20 12:56:56'
+          formattedCreatedAt: 20 Nov 2019
+          currency:
+            id: 11
+            name: Indian Rupee
+            code: INR
+            symbol: ₹
+            precision: 2
+            thousand_separator: ','
+            decimal_separator: .
+            swap_currency_symbol: 0
+            created_at: '2019-11-20 12:39:24'
+            updated_at: '2019-11-20 12:39:24'
+          billing_address:
+            id: 2
+            name: john doe
+            address_street_1: street 1
+            address_street_2: street2
+            city_id: 783
+            state_id: 12
+            country_id: 101
+            zip: '123456'
+            phone: '1234567890'
+            fax: null
+            type: billing
+            user_id: 2
+            created_at: '2019-11-20 12:56:56'
+            updated_at: '2019-11-20 12:56:56'
+          shipping_address:
+            id: 3
+            name: john doe
+            address_street_1: street 1
+            address_street_2: street2
+            city_id: 783
+            state_id: 12
+            country_id: 101
+            zip: '123456'
+            phone: '1234567890'
+            fax: null
+            type: shipping
+            user_id: 2
+            created_at: '2019-11-20 12:56:56'
+            updated_at: '2019-11-20 12:56:56'
+      description: ''
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+        contact_name:
+          type: string
+        company_name:
+          type: string
+        website:
+          type: string
+        currency_id:
+          type: integer
+        company_id:
+          type: integer
+      required:
+        - name
+        - company_id
+  securitySchemes: {}
